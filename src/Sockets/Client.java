@@ -32,7 +32,7 @@ public class Client {
             return;
         }
 
-        String mensaje = "Hola";
+        String mensaje = "";
 
         // Bucle que seguira enviando datos hasta que el usuario escriva Over
 
@@ -49,13 +49,13 @@ public class Client {
             try {
                 in.close();
                 out.close();
+                s.close();
             } catch (IOException i) {
                 System.out.println(i);
             }
-
-            public static void main(String[] args) {
-                new Client("127.0.0.1", 5000);
-            }
         }
+    }
+    public static void main(String[] args) {
+        new Client("127.0.0.1", 5000);
     }
 }
