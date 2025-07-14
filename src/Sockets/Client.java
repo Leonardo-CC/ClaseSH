@@ -33,5 +33,29 @@ public class Client {
         }
 
         String mensaje = "Hola";
+
+        // Bucle que seguira enviando datos hasta que el usuario escriva Over
+
+        while (!mensaje.equals("Over")) {
+            try {
+                mensaje = in.readLine(); // Lee los datos del teclado
+                out.writeUTF(mensaje); // envia al servidor
+            } catch (IOException i) {
+                System.out.println(i);
+            }
+
+            // cierre la conexion
+
+            try {
+                in.close();
+                out.close();
+            } catch (IOException i) {
+                System.out.println(i);
+            }
+
+            public static void main(String[] args) {
+                new Client("127.0.0.1", 5000);
+            }
+        }
     }
 }
