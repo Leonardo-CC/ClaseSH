@@ -1,60 +1,56 @@
 package Sockets;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
 
 public class Client {
-    // Declaramos los sockets y los streams
+    // Declaramos socket y los streams
     private Socket s = null;
     private DataInputStream in = null;
     private DataOutputStream out = null;
 
-    // Constructor del cliente que recibe la dirección IP
+    // Constructor del cliente que recibe dirección IP y puerto
     public Client(String addr, int port) {
         try {
-            // Creamos el socket que se conecta al servidor
+            // Se crea el socket y se conecta al servidor
             s = new Socket(addr, port);
             System.out.println("Conectado al servidor");
 
-            // Entrada de datos por terminal
+            // Entrada de datos desde la terminal
             in = new DataInputStream(System.in);
 
             // Salida de datos hacia el servidor
             out = new DataOutputStream(s.getOutputStream());
         } catch (UnknownHostException u) {
-            System.out.println("Error de Host" + u);
+            System.out.println("Error de host: " + u);
             return;
         } catch (IOException i) {
-            System.out.println("Error de E/S" + i);
+            System.out.println("Error de E/S: " + i);
             return;
         }
 
         String mensaje = "";
 
-        // Bucle que seguira enviando datos hasta que el usuario escriva Over
-
+        // Bucle que sigue enviando datos hasta que el usuario escriba "Over"
         while (!mensaje.equals("Over")) {
             try {
-                mensaje = in.readLine(); // Lee los datos del teclado
-                out.writeUTF(mensaje); // envia al servidor
-            } catch (IOException i) {
-                System.out.println(i);
-            }
-
-            // cierre la conexion
-
-            try {
-                in.close();
-                out.close();
-                s.close();
+                mensaje = in.readLine();      // Lee desde teclado
+                out.writeUTF(mensaje);        // Envia al servidor
             } catch (IOException i) {
                 System.out.println(i);
             }
         }
+
+        // Cierre de conexión
+        try {
+            in.close();
+            out.close();
+            s.close();
+        } catch (IOException i) {
+            System.out.println(i);
+        }
     }
+
     public static void main(String[] args) {
         new Client("127.0.0.1", 5000);
     }
