@@ -1,9 +1,7 @@
 package Sockets;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
 public class Server {
     private Socket s = null;
@@ -15,10 +13,10 @@ public class Server {
         try {
             // Se inicia el servidor en el puerto dato
             ss = new ServerSocket(port);
-            System.out.println("Servicdor iniciado");
+            System.out.println("Servidor iniciado");
             System.out.println("Esperando al cliente");
 
-            // Acepta la conexion del cliente
+            // Acepta la conexión del cliente
             s = ss.accept();
             System.out.println("Cliente esta conectado");
 

@@ -17,7 +17,7 @@ public class MultiThreadedServer {
                 // Mostramos la ip del cliente conectado
                 System.out.println("Nuevo cliente conectado: " + clientSocket.getInetAddress());
 
-                // Se crea un hilo para manejar la conexion del cliente
+                // Se crea un hilo para manejar la conexión del cliente
 
                 ClientHandler handler = new ClientHandler(clientSocket);
                 new Thread(handler).start(); //iniciamos el Hilo
